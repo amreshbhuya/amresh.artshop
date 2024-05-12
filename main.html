@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="https://i.ibb.co/G0tXtKd/Whats-App-Image-2024-04-10-at-02-57-10-9376c7ff.jpg" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Art Gallery</title>
+    <link rel="stylesheet" href="styles.css">
+     
+</head>
+<body>
+    <header>
+
+<h1>Art Gallery</h1>
+<div class="profile">
+    <img src="https://i.ibb.co/G0tXtKd/Whats-App-Image-2024-04-10-at-02-57-10-9376c7ff.jpg" alt="Profile Picture">
+    <ul class="button">
+      <li ><a href="about.html">About</a></li>
+      <li><a href="https://youtube.com/@creativeindia1999?si=nc-Q1SfINPW2vpIw" target="_blank" >Learning</a></li>
+      <li><a href="https://www.instagram.com/itz__mausumi/?igshid=Y2M0YTlkZGNmOQ%3D%3D"target="_blank" rel="noopener noreferrer">instagram</a></li>
+    </ul>
+</div>
+</header>
+
+<!-- Search bar -->
+<div class="search-container">
+    <input type="text" id="searchInput" placeholder="Search Artworks...">
+    <button onclick="searchArtworks()">Search</button>
+</div>
+
+<div class="gallery-container" id="galleryContainer">
+    <!-- Artworks will be dynamically added here -->
+</div>
+
+<!-- Shopping cart -->
+<div class="shopping-cart" id="shoppingCart">
+    <h2>Shopping Cart</h2>
+    <div id="cartItems"></div>
+    <div id="cartTotal">Total: $0</div>
+    <button class="checkout-btn" onclick="showCheckoutForm()">Checkout</button>
+    
+</div>
+<!-- Back Button -->
+<button class="back-button" id="back" onclick="goBack()">Back</button>
+
+<!-- Gallery container -->
+<form id="form" style="display:none">
+    <h2>Checkout</h2>
+  <div class="field">
+    <label for="from_name">Your name</label>
+    <input type="text" name="from_name" id="from_name">
+  </div>
+  <div class="field">
+    <label for="to_name">your phone number /Email I'D</label>
+    <input type="text" name="to_name" id="to_name">
+  </div>
+  <div class="field">
+    <label for="message">message</label>
+    <input type="text" name="message" id="message">
+  </div>
+  <div class="field">
+    <label for="reply_to">Art name</label>
+    <input type="text" name="reply_to" id="reply_to">
+  </div>
+
+  <input type="submit" id="button" value="Send Email" >
+</form>
+
+<script type="text/javascript"
+  src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+<script type="text/javascript">
+  emailjs.init('VII_XC9id3T6BUofM')
+</script>
+<!-- Contact information -->
+<footer>
+<div class="contact-info">
+    <p>Email: <a href="mailto:amreshbhuyanone@gmail.com">amreshbhuyanone@gmail.com</a></p>
+    <p>Phone: <a href="tel:+917855993195">7855993195</a></p>
+    <p>Address: At-Odisha, Mayurbhanj, Pin-757026, India</p>
+    <a href="https://www.instagram.com/itz__mausumi/?igshid=Y2M0YTlkZGNmOQ%3D%3D" target="_blank" rel="noopener noreferrer"><img src="https://static.cdninstagram.com/rsrc.php/v3/yI/r/VsNE-OHk_8a.png" alt="instagram"></a>
+</div>
+</footer>
+<!-- Checkout form -->
+
+<script src="script.js"></script>
+<script>
+
+    function showCheckoutForm() {
+        
+        document.getElementById('shoppingCart').style.display = 'none';
+        document.getElementById('form').style.display = 'block';
+    }
+    const btn = document.getElementById('button');
+
+    document.getElementById('form')
+      .addEventListener('submit', function(event) {
+        event.preventDefault();
+    
+        btn.value = 'Sending...';
+    
+        const serviceID = 'default_service';
+        const templateID = 'template_2nmx3xm';
+    
+        emailjs.sendForm(serviceID, templateID, this)
+          .then(() => {
+            btn.value = 'Send Email';
+            alert('Sent!');
+            alert('Order placed successfully!');
+            cart.length = 0;
+            updateCart();
+            document.getElementById('form').reset();
+            document.getElementById('form').style.display = 'none';
+          }, (err) => {
+            btn.value = 'Send Email';
+            alert(JSON.stringify(err));
+          });
+      });
+    
+    </script>
+</body>
+</html>
